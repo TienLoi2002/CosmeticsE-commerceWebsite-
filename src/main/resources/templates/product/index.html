@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: html_head}">
+    <meta charset="UTF-8">
+    <title>Sản phẩm</title>
+    <style>
+        .comment-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .comment-container {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .comment-container .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .comment-container .card-text {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="fragments :: _header">
+
+</div>
+<div id="page-content" >
+    <!--MainContent-->
+    <div id="MainContent" class="main-content" role="main">
+        <!--Breadcrumb-->
+        <div class="bredcrumbWrap">
+            <div class="container breadcrumbs" style="margin-top:20px">
+            </div>
+        </div>
+        <!--End Breadcrumb-->
+
+        <div id="ProductSection-product-template" style="margin-top:65px" class="product-template__container prstyle1 container">
+            <!--product-single-->
+            <div class="product-single">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product-details-img">
+                            <div class="zoompro-wrap product-zoom-right pl-20">
+                                <div class="zoompro-span">
+                                    <img class=" lazyload zoompro"
+                                         alt="" th:src="@{/images/products/__${product.img}__}"/>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product-single__meta">
+                            <h1 class="product-single__title" th:text="${product.name}"></h1>
+                            <div class="product-nav clearfix">
+                                <a href="#" class="next" title="Next"><i class="fa fa-angle-right"
+                                                                         aria-hidden="true"></i></a>
+                            </div>
+
+                            <div class="product-single__description rte" th:text="${product.description}">
+
+                            </div>
+
+                            <div class="swatch clearfix swatch-1 option2" data-option-index="1">
+                                <div class="product-form__item">
+                                    <div data-value="15ml" class="swatch-element xs available">
+                                        <input class="swatchInput" id="swatch-1-xs" type="radio" name="option-1" checked th:value="15ml">
+                                        <label class="swatchLbl small" for="swatch-1-xs" th:title="15ml">15ml</label>
+                                    </div>
+                                    <div data-value="40ml" class="swatch-element s available">
+                                        <input class="swatchInput" id="swatch-1-s" type="radio" name="option-1" th:value="40ml">
+                                        <label class="swatchLbl small" for="swatch-1-s" th:title="40ml">40ml</label>
+                                    </div>
+                                    <div data-value="100ml" class="swatch-element m available">
+                                        <input class="swatchInput" id="swatch-1-m" type="radio" name="option-1" th:value="100ml">
+                                        <label class="swatchLbl small" for="swatch-1-m" th:title="100ml">100ml</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Product Action -->
+                            <div class="product-action clearfix">
+                                <div class="product-form__item--submit">
+                                    <a id="appendSize" th:href="@{/cart/add/{id}(id=${product.id},size='15ml')}">
+                                        <button class="btn product-form__cart-submit" type="button">Thêm vào giỏ hàng</button>
+
+                                    </a>
+                                </div>
+                                <!-- End Product Action -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--End-product-single-->
+                    <!--Product Feature-->
+                    <div class="prFeatures">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
+
+                                <img th:src="@{/assets/images/credit-card.png}" alt="Safe Payment" title="Safe Payment"/>
+                                <div class="details"><h3>THANH TOÁN AN TOÀN</h3>Thanh toán bằng nhiều phương thức thanh toán nhất thế giới.</div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
+                                <img th:src="@{/assets/images/shield.png}" alt="Confidence" title="Confidence"/>
+                                <div class="details"><h3>Confidence</h3>Protection covers your purchase and personal data.</div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
+                                <img th:src="@{/assets/images/worldwide.png}" alt="Worldwide Delivery"
+                                     title="Worldwide Delivery"/>
+                                <div class="details"><h3>GIAO HÀNG AN TOÀN THẾ GIỚI</h3>MIỄN PHÍ &amp; vận chuyển nhanh đến hơn 200 quốc gia.
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--End Product Fearure-->
+
+
+                <!--Related Product Slider-->
+                <!--End Related Product Slider-->
+
+                <!--Recently Product Slider-->
+
+                <div class="related-product grid-products">
+                    <header class="section-header">
+                        <h2 class="section-header__title text-center h2" style="margin-top:20px"><span>Sản Phẩm Khác</span></h2>
+                    </header>
+                    <div class="productPageSlider">
+                        <div class="col-12 item" th:each="product :${products}">
+
+                            <div class="col-12 item">
+                                <!-- start product image -->
+                                <div class="product-image">
+                                    <!-- start product image -->
+                                    <a th:href="@{/product/{productId}(productId=${product.id})}">
+                                        <!-- image -->
+                                        <img class="primary  "
+                                             th:src="@{/images/products/__${product.img}__}"
+                                             alt="image" title="product">
+                                        <!-- End image -->
+                                        <!-- Hover image -->
+                                        <img class="hover  "
+                                             th:src="@{/images/products/__${product.img}__}"
+                                             alt="image"
+                                             title="product">
+                                        <!-- End hover image -->
+                                    </a>
+                                    <!-- end product image -->
+
+                                    <!-- Start product button -->
+
+                                    <!-- end product button -->
+                                </div>
+                                <!-- end product image -->
+
+                                <!--start product details -->
+                                <div class="product-details text-center">
+                                    <!-- product name -->
+                                    <div class="product-name">
+                                        <a href="#" th:text="${product.name}"></a>
+                                    </div>
+                                    <!-- End product name -->
+                                    <!-- product price -->
+                                    <div class="product-price">
+                                        <span class="price" th:text="${product.price}"></span>
+                                    </div>
+                                    <!-- End product price -->
+
+
+                                </div>
+                                <!-- End product details -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Related Product Slider-->
+
+                    <!--Recently Product Slider-->
+                    <!--End Recently Product Slider-->
+                </div>
+                <!--#ProductSection-product-template-->
+            </div>
+            <!--MainContent-->
+        </div>
+
+        <!--Display comment-->
+        <div class="container">
+            <h2 class="text-center">Đánh giá sản phẩm</h2>
+            <div>
+                <h2 class="total comment product">
+                    <span th:text="${totalComment}"></span> Lượt đánh giá cho sản phẩm này
+                </h2>
+            </div>
+            <div>
+                <h3>
+                    <div class="product-review">
+                        <i class="font-13 fa fa-star"></i>
+                        <span th:text="${rating1Percentage != null ? rating1Percentage : '0'}"></span> %/ 100%
+                    </div>
+                    <br>
+                    <div class="product-review">
+                        <i class="font-13 fa fa-star"></i>
+                        <i class="font-13 fa fa-star"></i>
+                        <span th:text="${rating2Percentage != null ? rating2Percentage : '0'}"></span> %/ 100%
+                    </div>
+                    <br>
+                    <div class="product-review">
+                        <i class="font-13 fa fa-star"></i>
+                        <i class="font-13 fa fa-star"></i>
+                        <i class="font-13 fa fa-star"></i>
+                        <span th:text="${rating3Percentage != null ? rating3Percentage : '0'}"></span> %/ 100%
+                    </div>
+                    <br>
+                    <div class="product-review">
+                        <i class="font-13 fa fa-star"></i>
+                        <i class="font-13 fa fa-star"></i>
+                        <i class="font-13 fa fa-star"></i>
+                        <span th:text="${rating4Percentage != null ? rating4Percentage : '0'}"></span> %/ 100%
+                    </div>
+                    <br>
+                    <div class="product-review">
+                        <i class="font-13 fa fa-star"></i>
+                        <i class="font-13 fa fa-star"></i>
+                        <i class="font-13 fa fa-star"></i>
+                        <span th:text="${rating5Percentage != null ? rating5Percentage : '0'}"></span> %/ 100%
+                    </div>
+                </h3>
+            </div>
+            <div class="container" id="view-container">
+                <div th:each="comment : ${listComments}" class="comment-container card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${comment.customer.name}"></h5>
+                        <p class="card-text" th:text="${comment.content}"></p>
+                        <p class="card-text" th:text="${comment.star} + ' Sao'"></p>
+                        <form  method="GET" th:action="@{/product/edit/{productId}(productId=${productId})}">
+                            <input type="hidden" name="commentId" th:value="${comment.id}">
+                            <button class="btn btn-primary">Sửa bình luận</button>
+                        </form>
+                        <form method="POST" th:action="@{/product/removeComment/{productId}(productId=${productId})}">
+                            <input type="hidden" name="commentId" th:value="${comment.id}">
+                            <button class="btn btn-primary" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này?');">Xóa bình luận</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Comment Part-->
+            <div class="container">
+                <h3>Hãy để lại cảm nghĩ của bạn</h3>
+                <form method="POST" th:object="${comment}" id="form"
+                      th:action="@{/product/comments/{productId}(productId=${productId})}">
+                    <input type="hidden" th:value="${productId}" name="productId">
+                    <div class="form-group">
+                        <label for="content">Nội dung:</label>
+                        <textarea class="form-control" id="content" placeholder="Gõ bình luận của bạn vào đây" name="content"
+                                  rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="star">Đánh giá sao cho sản phẩm này:</label>
+                        <select class="form-control" id="star" name="star" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <button type="button" id="submit-btn" class="btn btn-primary">Gửi</button>
+                </form>
+            </div>
+            <div th:replace="fragments :: _footer">
+            </div>
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+            <!--End Scoll Top-->
+
+
+            <div class="hide">
+                <div id="productInquiry">
+                    <div class="contact-form form-vertical">
+                        <div class="page-title">
+                            <h3>Camelia Reversible Jacket</h3>
+                        </div>
+                        <form method="post" action="#" id="contact_form" class="contact-form">
+                            <input type="hidden" name="form_type" value="contact"/>
+                            <input type="hidden" name="utf8" value="✓"/>
+                            <div class="formFeilds">
+                                <input type="hidden" name="contact[product name]" value="Camelia Reversible Jacket">
+                                <input type="hidden" name="contact[product link]"
+                                       value="/products/camelia-reversible-jacket-black-red">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <input type="text" id="ContactFormName" name="contact[name]" placeholder="Name" value=""
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email"
+                                               autocapitalize="off" value="" required>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <input required type="tel" id="ContactFormPhone" name="contact[phone]"
+                                               pattern="[0-9\-]*"
+                                               placeholder="Phone Number" value="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <textarea required rows="10" id="ContactFormMessage" name="contact[body]"
+                                      placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <input type="submit" class="btn" value="Send Message">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Including Jquery -->
+        <script th:src="@{/assets/js/vendor/jquery-3.3.1.min.js}"></script>
+        <script th:src="@{/assets/js/vendor/jquery.cookie.js}"></script>
+        <script th:src="@{/assets/js/vendor/modernizr-3.6.0.min.js}"></script>
+        <script th:src="@{/assets/js/vendor/wow.min.js}"></script>
+        <!-- Including Javascript -->
+        <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+        <script th:src="@{/assets/js/plugins.js}"></script>
+        <script th:src="@{/assets/js/popper.min.js}"></script>
+        <script th:src="@{/assets/js/lazysizes.js}"></script>
+        <script th:src="@{/assets/js/main.js}"></script>
+        <!-- Photoswipe Gallery -->
+        <script th:src="@{/assets/js/vendor/photoswipe.min.js}"></script>
+        <script th:src="@{/assets/js/vendor/photoswipe-ui-default.min.js}"></script>
+        <script defer>
+    $(function () {
+        var $pswp = $('.pswp')[0],
+            image = [],
+            getItems = function () {
+                var items = [];
+                $('.lightboximages a').each(function () {
+                    var $href = $(this).attr('href'),
+                        $size = $(this).data('size').split('x'),
+                        item = {
+                            src: $href,
+                            w: $size[0],
+                            h: $size[1]
+                        }
+                    items.push(item);
+                });
+                return items;
+            }
+        var items = getItems();
+
+        $.each(items, function (index, value) {
+            image[index] = new Image();
+            image[index].src = value['src'];
+        });
+        $('.prlightbox').on('click', function (event) {
+            event.preventDefault();
+
+            var $index = $(".active-thumb").parent().attr('data-slick-index');
+            $index++;
+            $index = $index - 1;
+
+            var options = {
+                index: $index,
+                bgOpacity: 0.9,
+                showHideOpacity: true
+            }
+            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+            lightBox.init();
+        });
+    });
+
+    $("#submit-btn").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/api/comment',
+            data: $("#form").serialize(),
+            success: function (res) {
+                let content = $("#content").val()
+                if (res != null && $.trim(res) !== '') {
+                    $("#view-container").append(`<div class="comment-container card mb-3">
+            <div class="card-body">
+                <h5 class="card-title" >${res}</h5>
+                <p class="card-text" >${content}</p>
+                <p class="card-text" >${$("#star").val()}</p>
+            </div>
+        </div>`)
+                    $("#content").val("")
+                }
+            }
+        })
+    })
+    // var principal = JSON.parse(document.getElementById("principal").getAttribute("data-principal-th"));
+    //
+    // if (principal != null) {
+    //     var customerName = "<p>Welcome, " + principal.name + "!</p>";
+    //     document.getElementById("customerName").innerHTML = customerName;
+    // } else {
+    //     alert("login")
+    // }
+
+    console.log(1)
+    $(".swatchInput").click(function () {
+
+        const [string1, string2, string3] = $("#appendSize").attr("href").split('=');
+
+        let getSize = $(this)[0].defaultValue
+        console.log(string1)
+        console.log(string2)
+
+        $("#appendSize").attr("href", string1 + "="  + getSize)
+        console.log(string1 + "=" + string2 + "=" + getSize)
+    })
+</script>
+    </div>
+</div>
+</body>
+</html>
+

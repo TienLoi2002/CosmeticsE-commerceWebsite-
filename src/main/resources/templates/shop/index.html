@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+
+    <meta charset="UTF-8">
+    <title>Trang chủ</title>
+</head>
+<body>
+<!--Header-->
+<div th:replace="fragments :: _header">
+</div>
+<!--End Header-->
+<!--Body-->
+<div id="page-content">
+    <!--Collection Banner-->
+    <div class="collection-header">
+        <div class="collection-hero">
+            <div class="collection-hero__image">
+                <img class="blur-up lazyload"
+                     src="/images/slide-6.jpg"></div>
+            <div class="collection-hero__title-wrapper">
+                <h1 class="collection-hero__title page-width">
+
+                </h1></div>
+        </div>
+    </div>
+    <!--End Collection Banner-->
+
+    <div class="container" style="margin-top:20px">
+        <div class="row justify-content-center">
+            <!--Main Content-->
+            <div class="col-12 col-sm-12 col-md-9 col-lg-9 main-col">
+                <hr>
+                <div class="productList">
+                    <div class="grid-products grid--view-items">
+                        <div class="row">
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-4 item" th:each="product : ${products}">
+                                <!-- start product image -->
+                                <div class="product-image">
+                                    <!-- start product image -->
+                                    <a th:href="@{/product/{productId}(productId=${product.id})}">
+                                        <!-- image -->
+                                        <img class="primary blur-up lazyload"
+                                             th:src="@{/images/products/__${product.img}__}"
+                                             alt="image" title="product">
+                                        <!-- End image -->
+                                        <!-- Hover image -->
+                                        <img class="hover blur-up lazyload"
+                                             th:src="@{/images/products/__${product.img}__}"
+                                             alt="image" title="product">
+                                        <span class="lbl pr-label1">new</span>
+                                    </a>
+                                </div>
+                                <div class="product-details text-center">
+                                    <div class="product-name" th:text="${product.name}">
+
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span> VNĐ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="clear">
+                <div class="pagination">
+                    <ul>
+                        <li class="active" th:if="${products.totalPages > 0}"
+                            th:each="pageNumber : ${pageNumbers}">
+                            <a
+                                    th:href="@{/shop(page=${pageNumber},size=${products.size})}"
+                                    th:classappend="${pageNumber==products.number + 1} ? active"
+                                    th:text="${pageNumber}"
+                            ></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:replace="fragments :: _footer">
+</div>
+<!--Scoll Top-->
+<span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+<!--End Scoll Top-->
+
+<!-- Including Jquery -->
+<script src="/assets/js/vendor/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/vendor/jquery.cookie.js"></script>
+<script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="/assets/js/vendor/wow.min.js"></script>
+<!-- Including Javascript -->
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/lazysizes.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

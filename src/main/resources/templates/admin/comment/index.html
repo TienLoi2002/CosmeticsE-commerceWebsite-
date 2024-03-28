@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <!-- Start main left sidebar menu -->
+    <div id="main_content">
+        <div th:replace="~{/admin/layout :: sidebar}"></div>
+        <div class="page">
+
+
+            <div id="page_top" class="section-body top_dark">
+
+                <div th:replace="~{/admin/layout :: navbar_layout}"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <div>
+                            <div class="section-body mt-3">
+                                <div class="container-fluid">
+                                    <div class="row clearfix">
+                                        <div class="col-12">
+                                            <h2>Trang quản lý bình luận</h2>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="">
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control"
+                                                                           name="keyword"
+                                                                           placeholder="Nhập từ khóa vào đây">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                                <button type="submit" class="btn btn-primary btn-block"
+                                                                        title="">Tìm kiếm
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-striped table-vcenter mb-0 text-nowrap">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <a href="?sortBy=id&amp;sortDir=asc">ID ▲</a>
+                                                                <a href="?sortBy=id&amp;sortDir=desc">ID ▼</a>
+                                                            </th>
+                                                            <th>Tên người dùng</th>
+                                                            <th>Nội dung</th>
+                                                            <th>Lượt đánh giá</th>
+                                                            <th>Mã sản phẩm</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Hành động</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr th:each="comment : ${listComments}">
+                                                            <th th:text="${comment.getId()}" scope="row"></th>
+                                                            <td th:text="${comment.getCustomer().getName()}"></td>
+                                                            <td th:text="${comment.getContent()}"></td>
+                                                            <td th:text="${comment.getStar()}"></td>
+                                                            <td th:text="${comment.getProduct().getId()}"></td>
+                                                            <td th:text="${comment.getProduct().getName()}"></td>
+                                                            <td>
+                                                                <a class="btn btn-primary"
+                                                                   th:href="@{/admin/comment/delete/comment/{idComment}(idComment=${comment.id})}"
+                                                                   onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này?')">Xóa</a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <nav aria-label="Page navigation example">
+                                                        <ul class="pagination">
+                                                            <li class="page-item pagination"
+                                                                th:if="${listComments.totalPages > 0}"
+                                                                th:each="pageNumber : ${pageNumbers}">
+                                                                <a class="page-link"
+                                                                   th:href="@{/admin/comment(page=${pageNumber},size=${listComments.size})}"
+                                                                   th:classappend="${pageNumber==listComments.number + 1} ? active"
+                                                                   th:text="${pageNumber}"
+                                                                ></a>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                    <div class="mb-3">
+                                                        <label for="size_option" class="form-label">Số lượng mỗi
+                                                            trang</label><br>
+                                                        <select class="form-select" name="size" id="size_option"
+                                                                onchange="getval(this);">
+                                                            <option selected value="0">Select row</option>
+                                                            <option value="5">5</option>
+                                                            <option value="10">10</option>
+                                                            <option value="15">15</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function getval(sel) {
+                    window.location.replace("http://localhost:8002/admin/comment?page=1&size=" + sel.value);
+                }
+            </script>
+            <div th:replace="~{/admin/layout :: layout_footer}"></div>
+        </div>
+        <!--    Footer Layout-->
+    </div>
+</div>
+<div th:replace="~{/admin/layout :: js_script_layout}"></div>
+</body>
+</html>

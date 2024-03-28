@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết sản phẩm</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<style>
+    /* Style for the form container */
+    .form-container {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    /* Style for the form input fields */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    /* Style for the form labels */
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Style for the form textarea */
+    textarea {
+        resize: vertical;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    /* Style for the form select */
+    select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    /* Style for the submit button */
+    #submit-btn {
+        margin-top: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Hover style for the submit button */
+    #submit-btn:hover {
+        background-color: #0069d9;
+    }
+</style>
+<body>
+<div class="form-container">
+    <form method="POST" th:object="${comment}" id="form"
+          th:action="@{/product/{productId}/edit(productId=${productId})}">
+        <input type="hidden" th:value="${comment.id}" name="commentId">
+        <div class="form-group">
+            <label for="content">Nội dung:</label>
+            <textarea class="form-control col-3" id="content" placeholder="Gõ bình luận của bạn vào đây" name="content"
+                      rows="3"
+                      required th:text="${comment.content}" th:field="*{content}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="star">Đánh giá sao cho sản phẩm này:</label>
+            <select class="form-control col-3" id="star" name="star" th:field="*{star}" required
+                    th:value="${comment.star}">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <button type="submit" id="submit-btn" class="btn btn-primary">Lưu thay đổi</button>
+    </form>
+</div>
+</body>
+</html>

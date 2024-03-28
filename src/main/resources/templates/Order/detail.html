@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+  <meta charset="UTF-8">
+  <title>Chi tiết lịch sử đặt hàng</title>
+
+</head>
+<body>
+
+<div th:replace="fragments :: _header"></div>
+<!--Body Content-->
+<div></div>
+<div id="main_content">
+
+  <div class="page">
+
+    <div id="page_top" class="section-body top_dark">
+      <div class="container breadcrumbs">
+        <a href="index.html" title="Back to the home page"></a><span></span>
+      </div>
+    </div>
+    <div class="section-body mt-3">
+      <div class="container-fluid">
+        <div class="row clearfix">
+
+
+          <div class="col-12" >
+            <div class="card">
+              <div class="table-responsive">
+                <table class="table table-hover table-striped table-vcenter mb-0 text-nowrap">
+                  <thead>
+                  <tr>
+                    <th colspan="5">Đơn hàng</th>
+                  </tr>
+                  <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Hình ảnh</th>
+                    <th>Size</th>
+                    <th>Giá tiền</th>
+                    <th>Số lượng</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="item : ${model}">
+                    <td th:text="${item.product.name}"></td>
+                    <td><img  th:src="@{/images/products/__${item.product.img}__}" width="100" /></td>
+                    <td ><div><span class="money" th:text="${item.size}" ></span></div></td>
+                    <td th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${item.quantity}"></td>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <a href="/Order/index">Trở về trang trước</a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--    Footer Layout-->
+</div>
+<!--End Body Content-->
+<div th:replace="fragments :: _footer">
+
+</div>
+</body>
+</html>

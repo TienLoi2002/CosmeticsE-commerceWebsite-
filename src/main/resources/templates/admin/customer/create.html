@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<div>
+    <div id="main_content">
+        <div th:replace="~{/admin/layout :: sidebar}"></div>
+        <div class="page">
+
+            <div id="page_top" class="section-body top_dark">
+
+                <div th:replace="~{/admin/layout :: navbar_layout}"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <div class="col-12">
+                            <form th:action="@{create}" th:object="${customer}" method="POST"
+                                  enctype="multipart/form-data">
+                                <div class="form-horizontal">
+                                    <h4>Thêm</h4>
+                                    <hr/>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Email</label>
+                                        <div class="col-sm-3">
+                                            <input type="email" class="form-control" th:field="*{email}">
+                                        </div>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('email')}" class="error-message">
+                                        <span style="color: red" class="text-center" th:errors="*{email}"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Tên</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" th:field="*{name}">
+                                        </div>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('name')}" class="error-message">
+                                        <span style="color: red" class="text-center" th:errors="*{name}"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Số điện thoại</label>
+                                        <div class="col-sm-3">
+                                            <input required type="text" class="form-control" th:field="*{phone}">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('phone')}" class="error-message">
+                                            <span style="color: red" class="text-center" th:errors="*{phone}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Mật khẩu</label>
+                                        <div class="col-sm-3">
+                                            <input required type="password" id="passwordInput" class="form-control"
+                                                   th:field="*{password}">
+                                            <input type="checkbox" onclick="handle()"> Hiển thị mật khẩu
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('password')}" class="error-message">
+                                            <span style="color: red" class="text-center" th:errors="*{password}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-3">Giới tính</label>
+                                        <div class="col-sm-2">
+                                            <select required th:field="*{gender}" name="gender" class="form-control">
+                                                <option value="1">Nam</option>
+                                                <option value="0">Nữ</option>
+                                                <option value="2">Khác</option>
+                                            </select>
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('gender')}" class="error-message">
+                                            <span style="color: red" class="text-center" th:errors="*{gender}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Vai trò</label>
+                                        <div class="col-sm-2">
+                                            <select required th:field="*{role}" name="role" class="form-control">
+                                                <option value="USER">USER</option>
+                                            </select>
+                                            <div th:if="${#fields.hasErrors('role')}" class="error-message">
+                                                <span style="color: red" class="text-center" th:errors="*{role}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" name="btnAdd" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </form>
+                            <div>
+                                <a th:href="@{/admin/customer}">Trở về trang trước</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div th:replace="~{/admin/layout :: layout_footer}"></div>
+        </div>
+    </div>
+</div>
+<script>
+    function handle() {
+        var x = document.getElementById("passwordInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+<div th:replace="~{/admin/layout :: js_script_layout}"></div>
+</body>
+</html>

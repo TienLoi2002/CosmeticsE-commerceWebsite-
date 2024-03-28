@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <!-- Start main left sidebar menu -->
+    <div id="main_content">
+        <div th:replace="/admin/layout :: sidebar"></div>
+        <div class="page">
+
+            <div id="page_top" class="section-body top_dark">
+
+                <div th:replace="/admin/layout :: navbar_layout"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <div class="col-12">
+                            <form th:action="@{/admin/category/edit}" th:object="${category}" method="post">
+                                <div class="form-horizontal">
+                                    <h4>Chỉnh sửa thể loại</h4>
+                                    <hr/>
+                                    <input type="hidden" th:field="*{id}">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label class="control-label col-md-2" for="name">Tên thể loại</label>
+                                            <input type="text" class="form-control" id="name" th:field="*{name}">
+                                            <span class="text-danger" th:if="${#fields.hasErrors('name')}"
+                                                  th:errors="*{name}"> </span>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Sửa" class="btn btn-default"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div>
+                                <a href="">Trở về trang chủ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="/admin/layout :: layout_footer"></div>
+        </div>
+        <!--    Footer Layout-->
+    </div>
+</div>
+
+
+<div th:replace="/admin/layout :: js_script_layout"></div>
+</body>
+</html>

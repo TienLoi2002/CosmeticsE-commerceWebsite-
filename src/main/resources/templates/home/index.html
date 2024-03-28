@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- belle/index.html   11 Nov 2019 12:16:10 GMT -->
+<head th:replace="fragments :: html_head">
+    <title>Home</title>
+</head>
+<body class="template-index belle template-index-belle">
+<!--frag header-->
+<div th:replace="fragments :: _header"></div>
+<!--Body Content-->
+<div id="page-content">
+    <!--Home slider-->
+    <div class="slideshow slideshow-wrapper pb-section sliderFull">
+        <div class="home-slideshow">
+            <div class="slide">
+                <div class="blur-up lazyload bg-size">
+                    <img class="blur-up lazyload bg-img"
+                         src="/images/slide-4.jpg"
+                         alt="Shop Our New Collection" title="Shop Our New Collection"/>
+                    <div class="slideshow__text-wrap slideshow__overlay classic bottom">
+                        <div class="slideshow__text-content bottom">
+                            <div class="wrap-caption center">
+                                <h2 class="h1 mega-title slideshow__title">Những Sản Phẩm Vượt Trội</h2>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="blur-up lazyload bg-size">
+                    <img class="blur-up lazyload bg-img"
+                         src="/images/slide-5.jpg"
+                         alt="Summer Bikini Collection" title="Summer Bikini Collection"/>
+                    <div class="slideshow__text-wrap slideshow__overlay classic bottom">
+                        <div class="slideshow__text-content bottom">
+                            <div class="wrap-caption center">
+                                <h2 class="h1 mega-title slideshow__title">Thẩm Mỹ-Cuộc Sống Của Những Con Người Hiện Đại</h2>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Home slider-->
+    <!--Collection Tab slider-->
+    <div class="tab-slider-product section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="section-header text-center">
+                        <h2 class="h2">NHỮNG SẢN PHẨM MỚI</h2>
+                        <p>Xem qua những sản phẩm của chúng tôi</p>
+                    </div>
+                    <div class="tabs-listing">
+                        <ul class="tabs clearfix">
+                            <li class="active" rel="tab1">Sản Phẩm</li>
+                        </ul>
+                        <div class="tab_container">
+                            <div id="tab1" class="tab_content grid-products">
+                                <div class="productSlider">
+                                    <div class="col-12 item" th:each="product: ${products}">
+                                        <!-- start product image -->
+                                        <div class="product-image">
+                                            <!-- start product image -->
+                                            <a th:href="@{/product/{productId}(productId=${product.id})}">
+                                                <!-- image -->
+                                                <img class="primary blur-up lazyload"
+                                                     th:src="@{/images/products/__${product.img}__}"
+                                                     alt="image" title="product">
+                                                <!-- End image -->
+                                                <!-- Hover image -->
+                                                <img class="hover blur-up lazyload"
+                                                     th:src="@{/images/products/__${product.img}__}"
+                                                     alt="image" title="product">
+                                                <!-- End hover image -->
+                                                <!-- product label -->
+                                                <!-- End product label -->
+                                            </a>
+                                            <!-- end product image -->
+
+                                            <!-- countdown start -->
+                                            <!-- countdown end -->
+
+                                            <!-- Start product button -->
+                                            <!-- end product button -->
+                                        </div>
+                                        <!-- end product image -->
+                                        <!--start product details -->
+                                        <div class="product-details text-center">
+                                            <!-- product name -->
+                                            <div class="product-name">
+                                                <a href="short-description.html" th:text="${product.name}"></a>
+                                            </div>
+                                            <!-- End product name -->
+                                            <!-- product price -->
+                                            <div class="product-price">
+                                                <span class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span> VNĐ
+                                            </div>
+                                            <!-- End product price -->
+
+
+                                        </div>
+                                        <!-- Variant -->
+                                        </ul>
+                                        <!-- End Variant -->
+                                    </div>
+                                    <!-- End product details -->
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Collection Tab slider-->
+
+<!--Collection Box slider-->
+
+<!--End Collection Box slider-->
+
+<!--Logo Slider-->
+
+<!--End Logo Slider-->
+
+<!--Featured Product-->
+
+<!--End Featured Product-->
+
+<!--Latest Blog-->
+
+<!--End Latest Blog-->
+
+<!--Store Feature-->
+<div class="main__policy">
+    <div class="row">
+        <div class="col l-3 m-6 " style="max-width: 100%">
+            <div class="policy bg-1 ">
+                <img src="/assets/images/policy1.png" class="policy__img " style="max-width: 76px">
+                <div class="policy__info">
+                    <h3 class="policy__title">GIAO HÀNG MIỄN PHÍ</h3>
+                    <p class="policy__description">Cho đơn hàng từ 300K</p>
+                </div>
+            </div>
+        </div>
+        <div class="col l-3 m-6" style="max-width: 100%">
+            <div class="policy bg-2">
+                <img src="/assets/images/policy2.png" class="policy__img" style="max-width: 76px">
+                <div class="policy__info">
+                    <h3 class="policy__title">ĐỔI TRẢ HÀNG</h3>
+                    <p class="policy__description">Trong 3 ngày đầu tiên</p>
+                </div>
+            </div>
+        </div>
+        <div class="col l-3 m-6" style="max-width: 100%">
+            <div class="policy bg-1">
+                <img src="/assets/images/policy3.png" class="policy__img" style="max-width: 76px">
+                <div class="policy__info">
+                    <h3 class="policy__title">HÀNG CHÍNH HÃNG</h3>
+                    <p class="policy__description">Cam kết chất lượng</p>
+                </div>
+            </div>
+        </div>
+        <div class="col l-3 m-6">
+            <div class="policy bg-2">
+                <img src="/assets/images/policy4.png" class="policy__img" style="max-width: 76px">
+                <div class="policy__info">
+                    <h3 class="policy__title">TƯ VẤN 24/24</h3>
+                    <p class="policy__description">Giải đáp mọi thắc mắc</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--End Store Feature-->
+</div>
+<!--End Body Content-->
+
+<!--Footer-->
+<div th:replace="fragments :: _footer">
+
+</div>
+<!--End Footer-->
+<!--Scoll Top-->
+
+
+<!-- Including Jquery -->
+<script src="/assets/js/vendor/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="/assets/js/vendor/jquery.cookie.js"></script>
+<script src="/assets/js/vendor/wow.min.js"></script>
+<!-- Including Javascript -->
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/lazysizes.js"></script>
+<script src="/assets/js/main.js"></script>
+<!--For Newsletter Popup-->
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.closepopup').on('click', function () {
+            jQuery('#popup-container').fadeOut();
+            jQuery('#modalOverly').fadeOut();
+        });
+
+        var visits = jQuery.cookie('visits') || 0;
+        visits++;
+        jQuery.cookie('visits', visits, {expires: 1, path: '/'});
+        console.debug(jQuery.cookie('visits'));
+        if (jQuery.cookie('visits') > 1) {
+            jQuery('#modalOverly').hide();
+            jQuery('#popup-container').hide();
+        } else {
+            var pageHeight = jQuery(document).height();
+            jQuery('<div id="modalOverly"></div>').insertBefore('body');
+            jQuery('#modalOverly').css("height", pageHeight);
+            jQuery('#popup-container').show();
+        }
+        if (jQuery.cookie('noShowWelcome')) {
+            jQuery('#popup-container').hide();
+            jQuery('#active-popup').hide();
+        }
+    });
+    jQuery(document).mouseup(function (e) {
+        var container = jQuery('#popup-container');
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.fadeOut();
+            jQuery('#modalOverly').fadeIn(200);
+            jQuery('#modalOverly').hide();
+        }
+    });
+</script>
+<!--End For Newsletter Popup-->
+</div>
+</body>
+<!-- belle/index.html   11 Nov 2019 12:20:55 GMT -->
+</html>

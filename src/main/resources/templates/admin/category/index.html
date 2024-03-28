@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div id="main_content">
+        <div th:replace="/admin/layout :: sidebar"></div>
+        <div class="page">
+
+            <div id="page_top" class="section-body top_dark">
+
+                <div th:replace="/admin/layout :: navbar_layout"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+
+                        <div class="col-12">
+                            <h2>Trang quản lý thể loại</h2>
+                            <p>
+
+                                <a class="btn btn-success" th:href="@{category/create}">Thêm thể loại</a>
+                            </p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="">
+
+                                        <div class="row">
+                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="keyword"
+                                                           placeholder="Nhập từ vào đây">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                <button type="submit" class="btn btn-primary btn-block"
+                                                        title="">Tìm kiếm
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped table-vcenter mb-0 text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Tên thể loại</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="category : ${categories}">
+                                            <th th:text="${category.id}" scope="row"></th>
+                                            <td th:text="${category.name}"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <a class="btn btn-primary" th:href="@{category/edit/{id}(id=${category.id})}"
+                                                onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này? ')">Sửa
+                                                </a>
+                                                |
+                                                <a class="btn btn-secondary" th:href="@{category/delete/{id}(id=${category.id})}"
+                                                   onclick="return confirm('Bạn có chắc chắn muốn sửa sản phẩm này?')">Xóa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div th:replace="/admin/layout :: layout_footer"></div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="/admin/layout :: js_script_layout"></div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+    <meta charset="UTF-8">
+    <title>Check out</title>
+</head>
+<body>
+<!--      Header-->
+<div th:replace="fragments :: _header">
+</div>
+<!--Body Content-->
+<div id="page-content">
+    <!--Page Title-->
+    <div id="MainContent" class="main-content" role="main">
+        <div class="bredcrumbWrap">
+            <div class="container breadcrumbs">
+                <a href="index.html" title="Back to the home page"></a><span></span>
+            </div>
+        </div>
+        <div class="page section-header text-center">
+            <div class="page-title">
+                <div class="wrapper"><h1 class="page-width"><b>Thanh toán</b></h1></div>
+            </div>
+        </div>
+        <!--End Page Title-->
+
+        <div class="container">
+
+
+            <div class="row billing-fields">
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="your-order-payment">
+                        <div class="your-order">
+                            <h2 class="order-title mb-4"><b>Giỏ hàng của bạn</b></h2>
+
+                            <div class="table-responsive-sm order-table">
+                                <table class="bg-white table table-bordered table-hover text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Tên sản phẩm</th>
+                                        <th>Size</th>
+                                        <th>Giá tiền</th>
+
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <tr th:each="item : ${all_items_in_shoppingcart}">
+                                            <td class="text-left" th:text="${item.name}">
+
+                                            </td >
+                                            <td><div><span class="money" th:text="${item.size}" ></span></div></td>
+
+                                            <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}">
+
+                                            </td>
+
+                                            <td th:text="${item.quantity}">
+
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <span class="money" th:text="${#numbers.formatDecimal(item.price * item.quantity, 0, 'COMMA', 2, 'POINT')}"></span>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                    </tbody>
+                                    <tfoot class="font-weight-600">
+                                    <tr>
+                                        <td colspan="4" class="text-right">Vận chuyển </td>
+                                        <td>Miễn phí</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="text-right">Tổng tiền</td>
+                                        <td th:text="${#numbers.formatDecimal(total_amount, 0, 'COMMA', 2, 'POINT')}"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 sm-margin-30px-bottom">
+                    <div class="create-ac-content bg-light-gray padding-20px-all">
+                        <form  th:action="@{/cart/checkout}" th:object="${order}" method="post">
+                            <h2 class="text-center"><b>Thông tin khách hàng</b></h2>
+                            <div class="form-group">
+                                <label>Họ tên khách hàng</label>
+                                <input type="text" name="name_receive" required th:field="*{nameReceive}" class="form-control" autocomplete="off" />
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text" name="phone_receive" th:field="*{phoneReceive}" class="form-control" autocomplete="off" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" name="address_receive" th:field="*{addressReceive}" class="form-control" autocomplete="off" value="" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Note</label>
+                                <input type="text" name="note"  th:field="*{note}" class="form-control" autocomplete="off" />
+                            </div>
+<!--                            <input type="hidden"  value="@tong" name="price"/>-->
+                            <div class="form-group">
+                                <label>Hình thức thanh toán</label>
+                                <select class="form-control" name="PayMent">
+                                    <option value="1" selected>COD</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-block btn-success">Đặt hàng</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<!--End Body Content-->
+<!--Footer-->
+<div th:replace="fragments :: _footer">
+
+</div>
+<!--Scoll Top-->
+<span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+<!--End Scoll Top-->
+
+<!-- Including Jquery -->
+<script src="/assets/js/vendor/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/vendor/jquery.cookie.js"></script>
+<script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="/assets/js/vendor/wow.min.js"></script>
+<!-- Including Javascript -->
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/lazysizes.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

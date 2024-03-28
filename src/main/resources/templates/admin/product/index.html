@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <div id="main_content">
+        <div th:replace="~{/admin/layout :: sidebar}"></div>
+        <div class="page">
+
+
+            <div id="page_top" class="section-body top_dark">
+
+                <div th:replace="~{/admin/layout :: navbar_layout}"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <div>
+                            <div class="section-body mt-3">
+                                <div class="container-fluid">
+                                    <div class="row clearfix">
+                                        <div class="col-12">
+                                            <h2>Trang quản lý sản phẩm</h2>
+                                            <p>
+
+                                                <a class="btn btn-primary" th:href="@{product/create}">Thêm sản phẩm mới</a>
+                                            </p>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="">
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" name="keyword"
+                                                                           placeholder="Gõ sản phẩm cần tìm kiếm vào đây">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                                <button type="submit" class="btn btn-primary btn-block"
+                                                                        title="">Tìm kiếm
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-striped table-vcenter mb-0 text-nowrap">
+                                                        <thead>
+                                                        <tr>
+
+                                                            <th>Id</th>
+                                                            <th>Tên</th>
+                                                            <th>Hình ảnh</th>
+                                                            <th>Mô tả</th>
+                                                            <th>Giá</th>
+                                                            <th>Tên Thể loại</th>
+                                                            <th>Hành động</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+
+                                                        <tr th:each="product : ${products}">
+                                                            <th th:text="${product.id}" scope="row"></th>
+                                                            <td th:text="${product.name}"></td>
+                                                            <td><img style="width:100px"
+                                                                     th:src="@{/images/products/__${product.img}__}" alt=""></td>
+                                                            <td>
+                                                                <div style=" overflow: hidden; inline-size: 150px;"
+                                                                     th:text="${product.description}">
+
+                                                                </div>
+                                                            </td>
+                                                            <td th:text="${product.price}"></td>
+                                                            <td th:text="${product.category.name}"></td>
+                                                            <td>
+                                                                <a class="btn btn-primary" th:href="@{product/edit/{id}(id=${product.id})}"
+                                                                onclick="return confirm('Bạn có chắc chắn muốn sửa sản phẩm này')">Sửa</a> |
+                                                                <a  class="btn btn-secondary" th:href="@{product/delete/{id}(id=${product.id})}"
+                                                                   onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="/admin/layout :: layout_footer"></div>
+        </div>
+        <!--    Footer Layout-->
+    </div>
+</div>
+
+
+<div th:replace="/admin/layout :: js_script_layout"></div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <div id="main_content">
+        <div th:replace="~{/admin/layout :: sidebar}"></div>
+        <div class="page">
+
+            <div id="page_top" class="section-body top_dark">
+
+                <div th:replace="~{/admin/layout :: navbar_layout}"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <div class="col-12">
+                            <form th:action="@{/admin/customer/edit/{idCustomer}(idCustomer=${idCustomer})}"
+                                  th:object="${customer}" method="POST" id="saveChangesForm">
+                                <div class="form-horizontal">
+                                    <h4>Chỉnh sửa thông tin khách hàng</h4>
+                                    <hr/>
+                                    <input type="hidden" th:value="${customer.id}" name="id">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Mã khách hàng</label>
+                                        <div class="col-md-10">
+                                            <input readonly th:field="*{id}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Email</label>
+                                        <div class="col-md-10">
+                                            <input type="email" th:field="*{email}" class="form-control">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('email')}" class="error-message">
+                                            <span style="color: red" class="text-center" th:errors="*{email}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Tên</label>
+                                        <div class="col-md-10">
+                                            <input th:field="*{name}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Số điện thoại</label>
+                                        <div class="col-md-10">
+                                            <input th:field="*{phone}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('phone')}" class="error-message">
+                                        <span style="color: red" class="text-center" th:errors="*{phone}"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Giới tính</label>
+                                        <div class="col-md-10">
+                                            <select th:field="*{gender}" name="gender" class="form-control">
+                                                <option value="1">Nam</option>
+                                                <option value="0">Nữ</option>
+                                                <option value="2">Khác</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Vai trò</label>
+                                        <div class="col-md-10">
+                                            <select th:field="*{role}" name="gender" class="form-control">
+                                                <option value="USER" selected>USER</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="button" value="Lưu thay đổi" class="btn btn-primary" onclick="confirmSaveChanges()"/>
+                                            </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div>
+                                <a th:href="@{/admin/customer}">Trở về trang trước</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div th:replace="~{/admin/layout :: layout_footer}"></div>
+        </div>
+    </div>
+</div>
+<script>
+    function confirmSaveChanges() {
+        if (confirm("Bạn có chắc chắn muốn lưu thay đổi?")) {
+            document.getElementById("saveChangesForm").submit();
+        }
+    }
+</script>
+
+<div th:replace="~{/admin/layout :: js_script_layout}"></div>
+</body>
+</html>

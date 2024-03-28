@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/layout :: head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<style>
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn:hover {
+        background-color: #17a2b8;
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+</style>
+<body>
+<div>
+    <div id="main_content">
+        <div th:replace="~{/admin/layout :: sidebar}"></div>
+        <div class="page">
+            <div id="page_top" class="section-body top_dark">
+                <div th:replace="~{/admin/layout :: navbar_layout}"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <div>
+                            <div class="section-body mt-3">
+                                <div class="container-fluid">
+                                    <div class="row clearfix">
+                                        <div class="col-12">
+                                            <h2>Trang quản lý người dùng</h2>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="">
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-8 col-md-4 col-sm-6">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" name="keyword" placeholder="Search">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                                <a style="background-color: #9999ff" type="submit"
+                                                                   th:href="@{/admin/customer(page=${pageNumbers},size=${listCustomers.size},sortBy='id',keyword=${keyword})}"
+                                                                   class="btn btn-primary btn-block"
+                                                                   title="">Tìm kiếm <i
+                                                                        class="fas fa-search"
+                                                                        style="color: #000000;"></i>
+                                                                </a>
+                                                            </div>
+                                                            <a class="btn btn-primary" th:href="@{customer/create}"><i
+                                                                    class="fas fa-user-plus"></i> Thêm
+                                                                người dùng
+                                                            </a>
+                                                            <br>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-striped table-vcenter mb-0 text-nowrap">
+                                                        <thead>
+                                                        <tr class="title">
+                                                            <th>
+                                                                <a href="?sortBy=id&amp;sortDir=asc">ID ▲</a>
+                                                                <a href="?sortBy=id&amp;sortDir=desc">ID ▼</a>
+                                                            </th>
+                                                            <th style="font-weight: bold">Email</th>
+                                                            <th style="font-weight: bold">
+                                                                <a href="?sortBy=name&amp;sortDir=asc">Tên người dùng
+                                                                    ▲</a>
+                                                                <a href="?sortBy=name&amp;sortDir=desc">Tên người dùng
+                                                                    ▼</a>
+                                                            </th>
+                                                            <th style="font-weight: bold">Số điện thoại</th>
+                                                            <th style="font-weight: bold">Giới tính</th>
+                                                            <th style="font-weight: bold">Vai trò</th>
+                                                            <th style="font-weight: bold">Hành động</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr th:each="customer : ${listCustomers}">
+                                                            <th th:text="${customer.getId()}" scope="row"></th>
+                                                            <td th:text="${customer.getEmail()}"></td>
+                                                            <td th:text="${customer.getName()}"></td>
+                                                            <td th:text="${customer.getPhone()}"></td>
+                                                            <td>
+                                                                <span th:if="${customer.getGender() == 1}">Nam</span>
+                                                                <span th:if="${customer.getGender() == 0}">Nữ</span>
+                                                                <span th:if="${(customer.getGender() != 0) && (customer.getGender() != 1)}">Khác</span>
+                                                            </td>
+                                                            <td th:text="${customer.getRole()}"></td>
+                                                            <td>
+                                                                <a style="background-color: forestgreen"
+                                                                   class="btn btn-primary"
+                                                                   th:href="@{/admin/customer/edit/{idCustomer}(idCustomer=${customer.id})}">Sửa
+                                                                    <i
+                                                                            class="fas fa-user-edit"
+                                                                            style="color: #000000;"></i> </a>
+                                                                |
+                                                                <a style="background-color: red" class="btn btn-danger"
+                                                                   th:href="@{/admin/customer/delete/{idCustomer}(idCustomer=${customer.id})}"
+                                                                   onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này?')">Xóa
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <nav aria-label="Page navigation example">
+                                                        <ul class="pagination">
+                                                            <li class="page-item pagination"
+                                                                th:if="${listCustomers.totalPages > 0}"
+                                                                th:each="pageNumber : ${pageNumbers}">
+                                                                <a class="page-link"
+                                                                   th:href="@{/admin/customer(page=${pageNumbers},size=${listCustomers.size},sortBy='id',q=${q})}"
+                                                                   th:classappend="${pageNumber==listCustomers.number + 1} ? active"
+                                                                   th:text="${pageNumber}"
+                                                                ></a>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                    <div>
+                                                        <label for="size_option"></label>Số lượng mỗi trang <br>
+                                                        <select class="form-select" name="size" id="size_option"
+                                                                onchange="getval(this);">
+                                                            <option selected value="0">Select row</option>
+                                                            <option value="5">5</option>
+                                                            <option value="10">10</option>
+                                                            <option value="15">15</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="~{/admin/layout :: layout_footer}"></div>
+        </div>
+    </div>
+</div>
+<script>
+
+    console.log(1)
+
+    function getval(sel) {
+        window.location.replace("http://localhost:8002/admin/customer?page=1&size=" + sel.value);
+    }
+</script>
+<div th:replace="~{/admin/layout :: js_script_layout}"></div>
+</body>
+</html>

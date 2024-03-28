@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+    <meta charset="UTF-8">
+    <title>Lịch sử đặt hàng</title>
+
+</head>
+<body>
+
+<div th:replace="fragments :: _header"></div>
+<!--Body Content-->
+<div></div>
+<div>
+    <!-- Start main left sidebar menu -->
+    <div id="main_content">
+
+        <div class="page">
+            <div class="container breadcrumbs">
+                <a href="index.html" title="Back to the home page"></a><span></span>
+            </div>
+
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <div>
+                            <div class="section-body mt-3">
+                                <div class="container-fluid">
+                                    <div class="container breadcrumbs">
+                                        <a href="index.html" title="Back to the home page"></a><span></span>
+                                    </div>
+                                    <div class="row clearfix">
+
+                                        <div class="col-12">
+
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-striped table-vcenter mb-0 text-nowrap">
+                                                        <thead>
+                                                        <tr>
+                                                            <th colspan="5">Đơn hàng</th>
+                                                            <th colspan="3">Hành động</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Tên người nhận</th>
+                                                            <th>Số điện thoại người nhận</th>
+                                                            <th>Địa chỉ người nhận</th>
+                                                            <th>Thời gian đặt</th>
+                                                            <th>Ghi chú</th>
+                                                            <th>Giá tiền</th>
+                                                            <th>Trạng thái</th>
+
+                                                            <th>Xem chi tiết</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr th:each="item : ${orders}">
+                                                            <td><a href="#" th:text="${item.id}" ></a></td>
+                                                            <td><span th:text="${item.nameReceive}"></span></td>
+                                                            <td><span th:text="${item.phoneReceive}"></span></td>
+                                                            <td><span th:text="${item.addressReceive}"></span></td>
+                                                            <td><span th:text="${item.createdAt}"></span></td>
+                                                            <td>
+                                                                <div style="overflow: hidden; inline-size: 150px;" th:text="${item.note}"></div>
+                                                            </td>
+                                                            <td th:text="${#numbers.formatDecimal(item.totalPrice, 0, 'COMMA', 2, 'POINT')}"> </td>
+
+                                                            <td>
+                                                                <span th:if="${item.status == 1}">Đã phê duyệt</span>
+                                                                <span th:if="${item.status == 2}">Đã hủy</span>
+                                                                <span th:unless="${item.status == 1 or item.status == 2}">Đang đặt</span>
+                                                            </td>
+
+
+
+
+                                                            <td>
+                                                                <div>
+                                                                    <a th:href="@{/order/{id}(id=${item.id})}">Chi tiết</a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!--    Footer Layout-->
+    </div>
+</div>
+<!--End Body Content-->
+<div th:replace="fragments :: _footer">
+
+</div>
+</body>
+</html>

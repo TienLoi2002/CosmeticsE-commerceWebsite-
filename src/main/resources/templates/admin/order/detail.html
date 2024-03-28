@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <!-- Start main left sidebar menu -->
+    <div id="main_content">
+        <div th:replace="/admin/layout :: sidebar"></div>
+        <div class="page">
+
+            <div id="page_top" class="section-body top_dark">
+
+                <div th:replace="/admin/layout :: navbar_layout"></div>
+            </div>
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <h2>Chi tiết đơn hàng</h2>
+
+                        <div class="col-12" >
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped table-vcenter mb-0 text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="5">Đơn hàng</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Giá tiền</th>
+                                            <th>Số lượng</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="item : ${model}">
+                                            <td th:text="${item.product.name}"></td>
+                                            <td><img  th:src="@{/images/__${item.product.img}__}" width="100" /></td>
+
+                                            <td th:text="${item.product.price}"></td>
+
+                                            <td th:text="${item.quantity}"></td>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            Trang
+                            <div style="float:right">
+                                Tổng tiền
+<!--                                <span th:text="${#aggregates.sum(model.![price])}"></span> VND-->
+
+
+                            </div>
+                        </div>
+
+                        <p>
+
+                            <a href="">Trở về trang trước</a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div th:replace="/admin/layout :: layout_footer"></div>
+        </div>
+        <!--    Footer Layout-->
+    </div>
+</div>
+
+
+<div th:replace="/admin/layout :: js_script_layout"></div>
+</body>
+</html>
